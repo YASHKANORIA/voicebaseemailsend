@@ -1,6 +1,7 @@
 import smtplib as smtp
 import speech_recognition as sr
 import pyttsx3
+from email.message import EmailMessage
 
 email_list = {
     'anjali' :'anjalirathi94@gmail.com',
@@ -38,7 +39,12 @@ def sendmail(receiver,body):
 
     server.starttls()
     server.login('workyashkanoria@gmail.com','****************')
-    server.sendmail('workyashkanoria@gmail.com',receiver,body)
+    email=EmailMessage()
+    email['From']='workyashkanoria@gmail.com'
+    email['To']=receiver
+    email['Subject']=subject
+    email.set_content(body)
+    server.send_message(email)
 
 def get_info_for_email():
     talk("Reciver Mail Address :")
